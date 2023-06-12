@@ -27,19 +27,12 @@ def dict_catalog(url='https://wallpaperscraft.ru'):
     soup_find_count = soup.find_all(class_='filter__count')
 
     # Категории изображений
-    catalog = [
-                  str(i).split()[-2]
-                  for i in soup_find_catalog
-              ][1:]
+    catalog = [str(i).split()[-2] for i in soup_find_catalog][1:]
     # Ссылки на изображения
-    link_catalog = [url + str(i).split()[-3].split('value="')[-1][:-2]
-                    for i in soup_find_catalog
-                    ][1:]
-
+    link_catalog = [url + str(i).split()[-3].split('value="')[-1][:-2] for i in soup_find_catalog][1:]
     count_catalog = [''.join(str(i).split('class="filter__count">')[-1].split('</span>')[:-1])
                      for i in soup_find_count
                      ]
-
     # Возвращаем список с которым будем работать Категория: (Ссылка, количество)
     return dict(zip(catalog, zip(link_catalog, count_catalog)))
 
@@ -143,7 +136,7 @@ def work_content(choice_user_catalog, choice_user_age):
                 )
 
                 req_photo_page = requests_photo(link_photo)
-                user_path = input('Вствте путь')
+                user_path = input('Вставьте путь')
                 save_photo(req_photo_page, y_page, user_path)
 
 
